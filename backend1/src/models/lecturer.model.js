@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const bcrypt = require('bcryptjs');
 
 const LecturerSchema = new Schema({
     fullname: {
@@ -32,3 +33,20 @@ const LecturerSchema = new Schema({
     },
     { timestamps: true }
 );
+
+
+
+LecturerSchema.pre('save', function (next) {
+    if (this.isModified('password')) {
+        const saltRounds = 10;
+        this.password = bcrypt.hashSync(this.password, saltRounds);
+    }
+    next();
+}
+);
+LecturerSchema.methods.comparePassword = function (candidatePassword) {
+    return bcrypt.compare(candidatePassword, this.password);
+}
+
+const Lecturer = mongoose.model('Lecturer', LecturerSchema);
+module.exports = Lecturer;
