@@ -7,13 +7,24 @@ const createCourse = async (courseData) => {
     }
 
     try {
-        const lecturer = await Lecturer.findOne({ email: lecturerEmail });
-        console.log(lecturer);
-        console.log(courseData);
+        
+        // console.log(courseData);
         
         courseData.courseCode = courseData.courseCode.trim().toUpperCase();
         courseData.courseName = courseData.courseName.trim().toUpperCase();
-        const newCourse = new Course(courseData);
+        const newCourse = new Course(courseData)
+        const lecturer = await Lecturer.findOne({ email: lecturerEmail });
+        if (!lecturer) {
+            throw new Error('Lecturer not found');
+        }
+
+        if (!lecturer.courses) {
+            lecturer.courses = [];
+        }
+
+        lecturer.courses.push(newCourse._id); // Add the course ID to the lecturer's courses array
+        await lecturer.save();
+        console.log(lecturer);
         newCourse.lecturer = lecturer._id; // Assign the lecturer ID to the course
         await newCourse.save();
         return newCourse;

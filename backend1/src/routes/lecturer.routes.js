@@ -5,5 +5,6 @@ const router = express.Router();
 
 
 router.post('/create', lecturerController.createLecturer);
+router.post('/login', lecturerController.loginLecturer);
 
 module.exports = router;

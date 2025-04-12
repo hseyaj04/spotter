@@ -42,7 +42,26 @@ const loginStudent = async (req, res) => {
     }
 }
 
+const markAttendance = async (req, res) => {
+    try {
+        const { studentId, qrPayload } = req.params;
+        const attendance = await studentService.markAttendance(studentId, qrPayload);
+        res.status(200).json({
+            status: 'success',
+            data: {
+                attendance,
+            },
+        });
+    } catch (error) {
+        res.status(400).json({
+            status: 'fail',
+            message: error.message,
+        });
+    }
+}
+
 module.exports = {
     registerStudent,
-    loginStudent
+    loginStudent,
+    markAttendance
 }

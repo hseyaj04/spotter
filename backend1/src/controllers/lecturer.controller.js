@@ -11,7 +11,18 @@ const createLecturer = async (req, res) => {
     }
 }
 
+const loginLecturer = async (req, res) => {
+    try {
+        const lecturerData = req.body;
+        const lecturer = await lecturerSevice.verifyLecturer(lecturerData);
+        res.status(200).json(lecturer);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
 
 module.exports = {
     createLecturer,
+    loginLecturer
 }

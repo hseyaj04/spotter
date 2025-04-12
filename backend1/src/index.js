@@ -16,9 +16,11 @@ app.use(express.json());
 const studentRoutes = require('./routes/student.routes');
 const courseRoutes = require('./routes/course.routes');
 const lecturerRoutes = require('./routes/lecturer.routes');
+const sessionRoutes = require('./routes/session.routes');
 app.use('/api/v1/lecturers', lecturerRoutes);
 app.use('/api/v1/courses', courseRoutes);
 app.use('/api/v1/students', studentRoutes);
+app.use('/api/v1/sessions', sessionRoutes);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
