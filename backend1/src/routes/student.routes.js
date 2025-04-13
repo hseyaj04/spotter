@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/register', studentController.registerStudent);
 router.post('/login', studentController.loginStudent);
-router.post('/attendance/:studentId/:qrPayload', studentController.markAttendance);
+router.post('/attendance', studentController.markAttendance);
 
 
 module.exports = router;

@@ -24,7 +24,7 @@ const createSession = async (sessionData) => {
         attendees: []
         });
 
-        return [session, qrDataURL]; // Return the session object
+        return { session, qrDataURL }; // Return the session object and QR code
     } catch (error) {
         throw new Error('Error creating session: ' + error.message);
     }

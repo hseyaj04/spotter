@@ -44,7 +44,7 @@ const loginStudent = async (req, res) => {
 
 const markAttendance = async (req, res) => {
     try {
-        const { studentId, qrPayload } = req.params;
+        const { studentId, qrPayload } = req.body;
         const attendance = await studentService.markAttendance(studentId, qrPayload);
         res.status(200).json({
             status: 'success',
