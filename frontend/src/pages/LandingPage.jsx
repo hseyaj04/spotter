@@ -1,21 +1,34 @@
 import React from "react";
-
-import Logo from "../../assets/Logo.png";
-import Name from "../../assets/spotter.png";
-import ProceedArrow from "../../assets/right-arrow.png";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import Logo from "../../../assets/logo.png";
+import Name from "../../../assets/spotter.png";
 
 const LandingPage = () => {
-  return (
-    <div className="landing-page">
-      <div className="content">
-        <img src={Logo} alt="Logo" className="logo" />
-        <img src={Name} alt="Spotter" className="name" />
-        <button className="proceed-button">
-          <img src={ProceedArrow} alt="Proceed" className="arrow" />
-        </button>
-      </div>
-    </div>
-  );
+    const navigate = useNavigate(); // Initialize useNavigate
+
+    const handleProceed = () => {
+        navigate("/login"); // Navigate to /login
+    };
+
+    return (
+        <div className="bg-white h-screen w-screen flex flex-col justify-between items-center">
+            {/* Centered Logo */}
+            <div className="flex-grow flex justify-center items-center">
+                <img src={Logo} alt="Logo" className="w-60 mt-20" />
+            </div>
+
+            {/* Proceed Button and Spotter Image */}
+            <div className="flex flex-col items-center mb-10">
+                <button
+                    onClick={handleProceed} // Add onClick handler
+                    className="bg-black rounded-full flex justify-center items-center mb-5 p-5 w-15 h-15"
+                >
+                    <i className="ri-arrow-right-line text-white text-3xl font-bold"></i>
+                </button>
+                <img src={Name} alt="Spotter" className="w-30" />
+            </div>
+        </div>
+    );
 };
 
 export default LandingPage;
