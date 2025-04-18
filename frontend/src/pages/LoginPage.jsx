@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Logo from '../../../assets/Logo.png';
-import Spotter from '../../../assets/spotter.png';
-import Spotter1 from '../../../assets/spotter1.png';
-
+import Logo from '../components/Logo';
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,9 +20,7 @@ const LoginPage = () => {
     <div className="max-w-md mx-auto p-5">
 
 
-        <div className="mb-8 text-left">
-            <img src={Spotter1} alt="Spotter" className="w-50  mx-auto mb-4" />
-        </div>
+        <Logo />
             
         <div className="p-8 bg-[#B8A7FF] bg-opacity-40 rounded-4xl">
             <h2 className="text-3xl font-semibold text-center mb-6">Login</h2>

@@ -4,9 +4,11 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import LandingPage from './pages/LandingPage'
 import LoginPage from './pages/LoginPage'
+import StudentSignup from './pages/StudentSignup'
+import Home from './pages/home'
+import Attendance from './pages/Attendance'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -18,7 +20,10 @@ function App() {
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='/login' element={<LoginPage />} />
-          
+          <Route path='/signup' element={<StudentSignup />} />
+          <Route path='/home' element={<Home />}/>
+          <Route path='/attendance' element={<Attendance />}/>
+
         </Routes>
       </Router>
     </>
