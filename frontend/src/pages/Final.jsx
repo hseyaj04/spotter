@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import Logo from '../components/Logo'
 import Check from '../../../assets/check.png';
-
+import Home from '../../../assets/home.png';
 function Final() {
     const dateString = new Date();
     const time = dateString.toLocaleTimeString()
@@ -10,8 +11,11 @@ function Final() {
     <div className='p-5'>
 
 
-        <div className='flex flex-row justify-left'>
+        <div className='flex flex-row items-center justify-between'>
             <Logo />
+            <Link to='/home'>
+                <img className='w-13 mb-10' src={Home} alt="" />
+            </Link>
         </div>
         <div className='bg-[#5F4FA6] rounded-3xl p-5 flex flex-col items-center'>
             <div className='flex flex-col items-center p-5 w-full bg-[#75C667] rounded-3xl'>
