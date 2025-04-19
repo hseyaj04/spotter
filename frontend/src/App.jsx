@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
@@ -7,6 +6,8 @@ import LoginPage from './pages/LoginPage'
 import StudentSignup from './pages/StudentSignup'
 import Home from './pages/home'
 import Attendance from './pages/Attendance'
+import ScannerPage from './pages/ScannerPage'
+import Final from './pages/Final'
 
 function App() {
 
@@ -23,7 +24,8 @@ function App() {
           <Route path='/signup' element={<StudentSignup />} />
           <Route path='/home' element={<Home />}/>
           <Route path='/attendance' element={<Attendance />}/>
-
+          <Route path='/camera' element={<ScannerPage />}/>
+          <Route path='/final' element={<Final/>}/>
         </Routes>
       </Router>
     </>
