@@ -8,7 +8,8 @@ import Home from './pages/home'
 import Attendance from './pages/Attendance'
 import ScannerPage from './pages/ScannerPage'
 import Final from './pages/Final'
-
+import LecturerLogin from './pages/LecturerLogin'
+import LecturerHome from './pages/LecturerHome'
 function App() {
 
   return (
@@ -26,6 +27,8 @@ function App() {
           <Route path='/attendance' element={<Attendance />}/>
           <Route path='/camera' element={<ScannerPage />}/>
           <Route path='/final' element={<Final/>}/>
+          <Route path='/lecturerlogin' element={<LecturerLogin/>}/>
+          <Route path='/lecturerhome' element={<LecturerHome/>}/>
         </Routes>
       </Router>
     </>

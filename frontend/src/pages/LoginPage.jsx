@@ -16,8 +16,12 @@ const LoginPage = () => {
     navigate('/signup'); // Redirect to the signup page
   };
 
+  const handleLecturerLogin = () => {
+    navigate('/lecturerlogin'); // Redirect to the lecturer login page
+  }
+
   return (
-    <div className="max-w-md mx-auto p-5">
+    <div className="max-w-md mx-auto h-screen p-5">
 
 
         <Logo />
@@ -67,7 +71,18 @@ const LoginPage = () => {
                 </button></p>
                 
             </div>
+            
+            
         </div> 
+        <div className="mt-60 text-center">
+            <button
+            onClick={handleLecturerLogin}
+            className='w-full py-3 bg-[#4E4280] text-xl text-white font-semibold rounded-4xl hover:bg-blue-600 transition mt-6'
+            >
+              Login as Lecturer
+            </button>
+            
+        </div>
         
         
     </div>
