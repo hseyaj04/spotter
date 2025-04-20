@@ -11,7 +11,6 @@ import Semester from '../../../assets/semester.png'
 import Dropdown from '../../../assets/dropdown.png'
 function LecturerHome() {
     const navigate = useNavigate()
-    const department = ['CSE', 'IT', 'ECE', 'EEE', 'CIVIL', 'MECH']
 
     const handleAttendance = () => {
         navigate('/lecturer-attendance')

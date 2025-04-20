@@ -10,6 +10,7 @@ import ScannerPage from './pages/ScannerPage'
 import Final from './pages/Final'
 import LecturerLogin from './pages/LecturerLogin'
 import LecturerHome from './pages/LecturerHome'
+import LecturerAttendance from './pages/LecturerAttendance'
 function App() {
 
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path='/final' element={<Final/>}/>
           <Route path='/lecturerlogin' element={<LecturerLogin/>}/>
           <Route path='/lecturerhome' element={<LecturerHome/>}/>
+          <Route path='/lecturerattendance' element={<LecturerAttendance/>}/>
         </Routes>
       </Router>
     </>

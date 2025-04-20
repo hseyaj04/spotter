@@ -11,7 +11,7 @@ const createSession = async (sessionData) => {
 
         // 1. Generate unique session payload
         const sessionPayload = crypto.randomBytes(16).toString('hex'); // Random string
-        const expiresAt = new Date(Date.now() + 30 * 60 * 1000); // 5 minutes
+        const expiresAt = new Date(Date.now() + 45 * 60 * 1000); // 45 minutes
 
         // 2. Generate QR code image
         const qrDataURL = await QRCode.toDataURL(sessionPayload);
@@ -30,6 +30,20 @@ const createSession = async (sessionData) => {
     }
 }
 
+
+const getSessionById = async (sessionId) => {
+    try {
+        const session = await Session.findById(sessionId).populate('lecturer course attendees');
+        if (!session) {
+            throw new Error('Session not found');
+        }
+        return session;
+    } catch (error) {
+        throw new Error('Error fetching session: ' + error.message);
+    }
+}
+
 module.exports = {
-    createSession
+    createSession,
+    getSessionById
 }
