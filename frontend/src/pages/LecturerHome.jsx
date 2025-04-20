@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import Logo from '../components/Logo'
 import TimeTable from '../../../assets/table-calendar.png'
 import Dashboard from '../../../assets/dashboard.png'
@@ -7,7 +8,14 @@ import Plus from '../../../assets/plus.png'
 import Lecturer from '../../../assets/teacher.png'
 import Department from '../../../assets/corporation.png'
 import Semester from '../../../assets/semester.png'
+import Dropdown from '../../../assets/dropdown.png'
 function LecturerHome() {
+    const navigate = useNavigate()
+    const department = ['CSE', 'IT', 'ECE', 'EEE', 'CIVIL', 'MECH']
+
+    const handleAttendance = () => {
+        navigate('/lecturer-attendance')
+    }
   return (
     <div className='p-5'>
         <div className='flex justify-left my-1'>
@@ -47,13 +55,20 @@ function LecturerHome() {
                 </div>
             </div>
         </div>
-        <div className='bg-[#4E4280] p-5 rounded-2xl'>
-            <h2 className='text-2xl text-white font-semibold'>Select Subject</h2>
-            <div className='bg-[#9587cd]'>
-                <h2>CN</h2>
-                <h3>Computer Network</h3>
+        <div className='bg-[#4E4280] p-5 rounded-2xl flex flex-col items-center'>
+            <h2 className='text-2xl mb-3 text-white font-semibold'>Select Course</h2>
+            
+            <div className='bg-[#9587cd] my-4 w-full p-4 rounded-2xl flex flex-row items-center justify-between'>
+                <div>
+                    <h2 className='text-3xl font-bold text-white'>CN</h2>
+                    <h3 className='text-lg text-gray-800 font-semibold'>Computer Network</h3>
+                </div>
+            <div><img className='w-12 mr-2' src={Dropdown} alt="" /></div>
             </div>
-            <button>Start Attendance</button>
+            <button
+            onClick={handleAttendance} 
+            className='w-full bg-[#B8A7FF] p-4 text-xl rounded-full font-semibold'
+            >Start Attendance</button>
         </div>
     </div>
   )
