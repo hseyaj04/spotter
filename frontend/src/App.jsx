@@ -11,6 +11,8 @@ import Final from './pages/Final'
 import LecturerLogin from './pages/LecturerLogin'
 import LecturerHome from './pages/LecturerHome'
 import LecturerAttendance from './pages/LecturerAttendance'
+import StudentProtectedWrapper from './wrappers/StudentProtectedWrapper'
+
 function App() {
 
   return (
@@ -22,12 +24,30 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<LandingPage />} />
-          <Route path='/login' element={<LoginPage />} />
+          <Route 
+          path='/login' 
+          element={<LoginPage />}/>
           <Route path='/signup' element={<StudentSignup />} />
-          <Route path='/home' element={<Home />}/>
-          <Route path='/attendance' element={<Attendance />}/>
-          <Route path='/camera' element={<ScannerPage />}/>
-          <Route path='/final' element={<Final/>}/>
+          <Route path='/home' element={
+            <StudentProtectedWrapper>
+              <Home />
+            </StudentProtectedWrapper>
+            }/>
+          <Route path='/attendance' element={
+            <StudentProtectedWrapper>
+              <Attendance />
+            </StudentProtectedWrapper>
+          }/>
+          <Route path='/camera' element={
+            <StudentProtectedWrapper>
+              <ScannerPage />
+            </StudentProtectedWrapper>
+          }/>
+          <Route path='/final' element={
+            <StudentProtectedWrapper>
+              <Final />
+            </StudentProtectedWrapper>
+          }/>
           <Route path='/lecturerlogin' element={<LecturerLogin/>}/>
           <Route path='/lecturerhome' element={<LecturerHome/>}/>
           <Route path='/lecturerattendance' element={<LecturerAttendance/>}/>

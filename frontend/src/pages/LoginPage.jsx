@@ -1,15 +1,32 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
+import Axios from 'axios';
+import { StudentDataContext } from '../context/StudentContext';
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {student, setStudent} = useContext(StudentDataContext)
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     // Add login logic here (e.g., API call)
-    console.log('Logging in with:', { email, password });
+    const response = await Axios.post(
+      `http://localhost:5000/api/v1/students/login`,
+      {
+        email,
+        password,
+      }
+    )
+    await setStudent(response.data.data.student)
+    console.log(student);
+    
+    
+    
+    localStorage.setItem('token', response.data.data.token)
+    navigate('/home');
+    
   };
 
   const handleSignupRedirect = () => {

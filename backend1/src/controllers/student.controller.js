@@ -29,7 +29,7 @@ const loginStudent = async (req, res) => {
         
         const student = await studentService.verifyStudent(studentData);
         const token = student.generateAuthToken();
-        res.cookie('jwt', token, {
+        res.cookie('token', token, {
             expires: new Date(Date.now() + 1 * 60 * 60 * 1000), // 1 hour
             httpOnly: true,
         });
@@ -66,8 +66,26 @@ const markAttendance = async (req, res) => {
     }
 }
 
+const getStudentProfile = async (req, res) => {
+    try {
+        const student = req.student;
+        res.status(200).json({
+            status: 'success',
+            data: {
+                student,
+            },
+        });
+    } catch (error) {
+        res.status(400).json({
+            status: 'fail',
+            message: error.message,
+        });
+    }
+}
+
 module.exports = {
     registerStudent,
     loginStudent,
-    markAttendance
+    markAttendance,
+    getStudentProfile
 }
