@@ -15,7 +15,18 @@ const loginLecturer = async (req, res) => {
     try {
         const lecturerData = req.body;
         const lecturer = await lecturerSevice.verifyLecturer(lecturerData);
-        res.status(200).json(lecturer);
+        const token = lecturer.generateAuthToken();
+        res.cookie('jwt', token, {
+            expires: new Date(Date.now() + 2 * 60 * 60 * 1000), // 2 hours
+            httpOnly: true,
+        });
+        res.status(200).json({
+            status: 'success',
+            data: {
+                lecturer,
+                token
+            },
+    });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }

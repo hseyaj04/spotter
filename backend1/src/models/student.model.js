@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
+const jwt = require('jsonwebtoken');
 
 const studentSchema = new Schema({
     fullname: {
@@ -51,6 +52,13 @@ const studentSchema = new Schema({
 }, {
     timestamps: true,
 });
+
+studentSchema.methods.generateAuthToken = function() {
+    console.log(process.env.JWT_SECRET);
+    
+    const token = jwt.sign({ id: this._id }, process.env.JWT_SECRET, {expiresIn: '1h'});
+    return token;        
+}
 
 studentSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();

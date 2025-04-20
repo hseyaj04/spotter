@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const bcrypt = require('bcryptjs');
-
+const jwt = require('jsonwebtoken');
 const LecturerSchema = new Schema({
     fullname: {
         firstname: {
@@ -46,6 +46,11 @@ LecturerSchema.pre('save', function (next) {
 );
 LecturerSchema.methods.comparePassword = function (candidatePassword) {
     return bcrypt.compare(candidatePassword, this.password);
+}
+
+LecturerSchema.methods.generateAuthToken = function () {
+    const token = jwt.sign({ id: this._id }, process.env.JWT_SECRET, { expiresIn: '2h' });
+    return token;
 }
 
 const Lecturer = mongoose.model('Lecturer', LecturerSchema);

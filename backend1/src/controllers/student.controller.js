@@ -28,10 +28,16 @@ const loginStudent = async (req, res) => {
         console.log(studentData);
         
         const student = await studentService.verifyStudent(studentData);
+        const token = student.generateAuthToken();
+        res.cookie('jwt', token, {
+            expires: new Date(Date.now() + 1 * 60 * 60 * 1000), // 1 hour
+            httpOnly: true,
+        });
         res.status(200).json({
             status: 'success',
             data: {
                 student,
+                token
             },
         });
     } catch (error) {
