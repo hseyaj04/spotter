@@ -23,7 +23,7 @@ function StudentProtectedWrapper({children}) {
                 if(response.status == 200){
                     setStudent(response.data.data.student)
                 }
-                console.log(response);
+                // console.log(response);
                 
             } catch (error) {
                 console.log(error);

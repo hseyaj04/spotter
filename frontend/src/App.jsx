@@ -12,7 +12,7 @@ import LecturerLogin from './pages/LecturerLogin'
 import LecturerHome from './pages/LecturerHome'
 import LecturerAttendance from './pages/LecturerAttendance'
 import StudentProtectedWrapper from './wrappers/StudentProtectedWrapper'
-
+import LecturerProtectedWrapper from './wrappers/LecturerProtectedWrapper'
 function App() {
 
   return (
@@ -47,8 +47,16 @@ function App() {
             </StudentProtectedWrapper>
           }/>
           <Route path='/lecturerlogin' element={<LecturerLogin/>}/>
-          <Route path='/lecturerhome' element={<LecturerHome/>}/>
-          <Route path='/lecturerattendance' element={<LecturerAttendance/>}/>
+          <Route path='/lecturerhome' element={
+            <LecturerProtectedWrapper>
+              <LecturerHome />
+            </LecturerProtectedWrapper>
+          }/>
+          <Route path='/lecturerattendance' element={
+            <LecturerProtectedWrapper>
+              <LecturerAttendance />
+            </LecturerProtectedWrapper>
+          }/>
         </Routes>
       </Router>
     </>
