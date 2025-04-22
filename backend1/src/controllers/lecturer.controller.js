@@ -33,7 +33,23 @@ const loginLecturer = async (req, res) => {
 }
 
 
+const getLecturerProfile = async (req, res) => {
+    try {
+        const lecturer = req.lecturer
+        res.status(200).json({
+            status: 'success',
+            data: {
+                lecturer,
+            },
+        });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
+
 module.exports = {
     createLecturer,
-    loginLecturer
+    loginLecturer,
+    getLecturerProfile
 }
