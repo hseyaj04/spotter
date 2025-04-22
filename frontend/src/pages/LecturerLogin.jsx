@@ -1,17 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
+import Axios from 'axios';
+import { lecturerDataContext } from '../context/LecturerContext';
 
 function LecturerLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {lecturer, setLecturer} = useContext(lecturerDataContext)
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Add lecturer login logic here (e.g., API call)
-    console.log('Lecturer logging in with:', { email, password });
+    
+    // console.log('Lecturer logging in with:', { email, password });
 
+    //login integration with backend
+    const response = await Axios.post(
+      `http://localhost:5000/api/v1/lecturers/login`,
+      {
+        email,
+        password,
+      }
+    )
+    // console.log(response.data.data.lecturer);
+    setLecturer(response.data.data.lecturer);
+    localStorage.setItem('token', response.data.data.token)
     // Navigate to lecturerhome after successful login
     navigate('/lecturerhome');
   };

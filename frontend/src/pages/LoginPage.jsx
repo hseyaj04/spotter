@@ -20,7 +20,7 @@ const LoginPage = () => {
       }
     )
     await setStudent(response.data.data.student)
-    console.log(student);
+    // console.log(student);
     
     
     
