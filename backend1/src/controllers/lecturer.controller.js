@@ -47,6 +47,15 @@ const getLecturerProfile = async (req, res) => {
     }
 }
 
+// const getAllCourses = async (req, res) => {
+//     try {
+//         const lecturer = req.lecturer
+
+//     } catch (error) {
+//         res.status(400).json({ message: error.message });
+//     }
+// }
+
 
 module.exports = {
     createLecturer,

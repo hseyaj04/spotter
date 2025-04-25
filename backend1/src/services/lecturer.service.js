@@ -54,7 +54,9 @@ const getLecturerByEmail = async (lecturerId) => {
     }
 }
 
+
 module.exports = {
     createLecturer,
-    verifyLecturer
+    verifyLecturer,
+    getLecturerByEmail,
 }

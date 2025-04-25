@@ -8,7 +8,7 @@ import Plus from '../../../assets/plus.png'
 import Lecturer from '../../../assets/teacher.png'
 import Department from '../../../assets/corporation.png'
 import Semester from '../../../assets/semester.png'
-import Dropdown from '../../../assets/dropdown.png'
+import SelectCourse from '../components/SelectCourse'
 function LecturerHome() {
     const navigate = useNavigate()
 
@@ -57,13 +57,7 @@ function LecturerHome() {
         <div className='bg-[#4E4280] p-5 rounded-2xl flex flex-col items-center'>
             <h2 className='text-2xl mb-3 text-white font-semibold'>Select Course</h2>
             
-            <div className='bg-[#9587cd] my-4 w-full p-4 rounded-2xl flex flex-row items-center justify-between'>
-                <div>
-                    <h2 className='text-3xl font-bold text-white'>CN</h2>
-                    <h3 className='text-lg text-gray-800 font-semibold'>Computer Network</h3>
-                </div>
-            <div><img className='w-12 mr-2' src={Dropdown} alt="" /></div>
-            </div>
+            <SelectCourse />
             <button
             onClick={handleAttendance} 
             className='w-full bg-[#B8A7FF] p-4 text-xl rounded-full font-semibold'

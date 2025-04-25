@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
+import Axios from 'axios';
 const StudentSignup = () => {
   const [formData, setFormData] = useState({
     fullname: {
@@ -33,10 +34,36 @@ const StudentSignup = () => {
     }
   };
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
+    
+
+    const response = await Axios.post(
+      `http://localhost:5000/api/v1/students/register`,
+      {
+        fullname: formData.fullname,
+        enrollmentNo: formData.enrollmentNo,
+        email: formData.email,
+        password: formData.password,
+        contact: formData.contact,
+        semester: formData.semester,
+        department: formData.department,
+      }
+    )
+    const loginResponse = await Axios.post(
+      `http://localhost:5000/api/v1/students/login`,
+      {
+        email: formData.email,
+        password: formData.password,
+      }
+    )
+    localStorage.setItem('token', loginResponse.data.data.token)
+    // console.log(loginResponse.data);
+
     navigate('/home'); // Redirect to the landing page after signup
-    console.log('Signing up with:', formData);
+    
+    
+    
   };
 
   const handleLoginRedirect = () => {
