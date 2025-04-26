@@ -58,8 +58,56 @@ const getSessionById = async (sessionId) => {
     }
 }
 
+const getOngoingSessions = async (department, semester) => {
+    try {
+      const sessions = await Session.aggregate([
+        {
+          $match: {
+            status: "active", // Only active sessions
+          },
+        },
+        {
+          $lookup: {
+            from: "courses", // Collection name for courses
+            localField: "course",
+            foreignField: "_id",
+            as: "courseDetails",
+          },
+        },
+        {
+          $unwind: "$courseDetails", // Flatten the courseDetails array
+        },
+        {
+          $match: {
+            "courseDetails.department": department, // Match department
+            "courseDetails.semester": semester,     // Match semester
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            lecturer: 1,
+            course: 1,
+            "courseDetails.courseName": 1,
+            "qrCode.data": 1,
+            "qrCode.expiresAt": 1,
+            attendees: 1,
+            status: 1,
+            createdAt: 1,
+          },
+        },
+      ]);
+  
+      return sessions;
+    } catch (error) {
+      throw new Error("Error fetching ongoing sessions: " + error.message);
+    }
+  };
+  
+
 module.exports = {
     createSession,
     getSessionById,
-    endSession
+    endSession,
+    getOngoingSessions
 }

@@ -1,7 +1,6 @@
 const studentService = require('../services/student.service');
 
 
-
 const registerStudent = async (req, res) => {
     try {
         // console.log(req.body);
@@ -83,9 +82,12 @@ const getStudentProfile = async (req, res) => {
     }
 }
 
+
+
+
 module.exports = {
     registerStudent,
     loginStudent,
     markAttendance,
-    getStudentProfile
+    getStudentProfile,
 }

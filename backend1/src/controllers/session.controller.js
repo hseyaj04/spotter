@@ -42,8 +42,23 @@ const getSessionById = async (req, res) => {
 }
 
 
+const getOngoingSessions = async (req, res) => {
+    try {
+        const studentInfo = req.body;
+        const sessions = await sessionService.getOngoingSessions(studentInfo.department, studentInfo.semester);
+        if (!sessions || sessions.length === 0) {
+            return res.status(404).json({ message: 'No ongoing sessions found' });
+        }
+        res.status(200).json(sessions);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+
 module.exports = {
     createSession,
     getSessionById,
-    endSession
+    endSession,
+    getOngoingSessions
 }
