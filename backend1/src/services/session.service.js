@@ -21,7 +21,8 @@ const createSession = async (sessionData) => {
         lecturer: lecturerId,
         course: courseId,
         qrCode: { data: sessionPayload, expiresAt },
-        attendees: []
+        attendees: [],
+        status: 'active'
         });
 
         return { session, qrDataURL }; // Return the session object and QR code

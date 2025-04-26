@@ -58,10 +58,6 @@ function LecturerHome() {
             <h2 className='text-2xl mb-3 text-white font-semibold'>Select Course</h2>
             
             <SelectCourse />
-            <button
-            onClick={handleAttendance} 
-            className='w-full bg-[#B8A7FF] p-4 text-xl rounded-full font-semibold'
-            >Start Attendance</button>
         </div>
     </div>
   )

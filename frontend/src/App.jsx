@@ -12,6 +12,7 @@ import LecturerHome from './pages/LecturerHome'
 import LecturerAttendance from './pages/LecturerAttendance'
 import StudentProtectedWrapper from './wrappers/StudentProtectedWrapper'
 import LecturerProtectedWrapper from './wrappers/LecturerProtectedWrapper'
+import StartAttendance from './pages/StartAttendance'
 function App() {
 
   return (
@@ -54,6 +55,11 @@ function App() {
           <Route path='/lecturerattendance' element={
             <LecturerProtectedWrapper>
               <LecturerAttendance />
+            </LecturerProtectedWrapper>
+          }/>
+          <Route path='/start-attendance' element={
+            <LecturerProtectedWrapper>
+              <StartAttendance />
             </LecturerProtectedWrapper>
           }/>
         </Routes>

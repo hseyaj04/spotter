@@ -22,7 +22,10 @@ const createCourse = async (courseData) => {
             lecturer.courses = [];
         }
 
-        lecturer.courses.push(newCourse._id); // Add the course ID to the lecturer's courses array
+        lecturer.courses.push({
+            id: newCourse._id,
+            name: newCourse.courseName,
+        }); // Add the course ID to the lecturer's courses array
         await lecturer.save();
         console.log(lecturer);
         newCourse.lecturer = lecturer._id; // Assign the lecturer ID to the course

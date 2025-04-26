@@ -20,6 +20,11 @@ const sessionSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Student'
       }],
+      status: {
+        type: String,
+        enum: ['active', 'completed'],
+        default: 'active'
+      }
 }, {
     timestamps: true
 });
