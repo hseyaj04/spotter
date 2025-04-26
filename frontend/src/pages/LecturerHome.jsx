@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
 import Logo from '../components/Logo'
 import TimeTable from '../../../assets/table-calendar.png'
@@ -9,12 +9,12 @@ import Lecturer from '../../../assets/teacher.png'
 import Department from '../../../assets/corporation.png'
 import Semester from '../../../assets/semester.png'
 import SelectCourse from '../components/SelectCourse'
+import { lecturerDataContext } from '../context/LecturerContext'
 function LecturerHome() {
     const navigate = useNavigate()
-
-    const handleAttendance = () => {
-        navigate('/lecturer-attendance')
-    }
+    const {lecturer, setLecturer} = useContext(lecturerDataContext);
+    console.log(lecturer);
+    
   return (
     <div className='p-5'>
         <div className='flex justify-left my-1'>
@@ -39,19 +39,23 @@ function LecturerHome() {
             <h2 className='font-semibold text-lg'>Assign Assignment</h2>
         </div>
         <div className='bg-[#cec2ff] rounded-2xl flex flex-col items-center p-3 my-3'>
-            <div className='flex flex-row items-center justify-right'>
+            <div className='flex flex-row items-center justify-between'>
                 <img className='h-12' src={Lecturer} alt="" />
-                <h2 className='text-2xl mx-3 font-semibold text-black'>Prof. John Doe</h2>
+                <div className='text-2xl mx-3 font-semibold text-black'>
+                    <div className='mr-2'>
+                        {lecturer.fullname.firstname.charAt(0).toUpperCase() + lecturer.fullname.firstname.slice(1).toLowerCase()}
+                    </div>
+                    <div>
+                        {lecturer.fullname.lastname.charAt(0).toUpperCase() + lecturer.fullname.lastname.slice(1).toLowerCase()}
+                    </div>
+                </div>
             </div>
             <div className='flex flex-row items-center justify-between'>
                 <div className='mr-4 flex flex-row items-center justify-center'>
                     <img className='h-10 p-2' src={Department} alt="" />
-                    <h3>CSE</h3>
+                    <h3>{lecturer.department}</h3>
                 </div>
-                <div className='ml-4 flex flex-row items-center justify-center'>
-                    <img className='h-10 p-2' src={Semester} alt="" />
-                    <h3>6th Sem</h3>
-                </div>
+                
             </div>
         </div>
         <div className='bg-[#4E4280] p-5 rounded-2xl flex flex-col items-center'>

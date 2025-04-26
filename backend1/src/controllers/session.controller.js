@@ -12,6 +12,19 @@ const createSession = async (req, res) => {
     }
 }
 
+const endSession = async (req, res) => {
+    try {
+        const { sessionId } = req.body;
+        const session = await sessionService.endSession(sessionId);
+        if (!session) {
+            return res.status(404).json({ message: 'Session not found' });
+        }
+        res.status(200).json(session);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 const getSessionById = async (req, res) => {
     try {
         const {sessionId} = req.params;
@@ -31,5 +44,6 @@ const getSessionById = async (req, res) => {
 
 module.exports = {
     createSession,
-    getSessionById
+    getSessionById,
+    endSession
 }

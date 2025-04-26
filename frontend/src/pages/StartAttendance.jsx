@@ -8,7 +8,7 @@ import { useNavigate} from 'react-router-dom'
 import { SessionDataContext } from '../context/SessionContext'
 function StartAttendance() {
     const navigate = useNavigate()
-    const {session, setSession} = useContext(SessionDataContext)
+    const {sessionData, setSessionData} = useContext(SessionDataContext)
     const {lecturer, setLecturer} = useContext(lecturerDataContext)
     // console.log(lecturer);
     const handleStartAttendance = async () => {
@@ -16,10 +16,12 @@ function StartAttendance() {
             lecturerId: lecturer._id,
             courseId: lecturer.selectedCourse.id,
         })
-        console.log(response.data.session);
+        // console.log(response.data);
         
-        await setSession(response.data.session)
-        console.log(session);
+        setSessionData(response.data)
+        // console.log(sessionData);
+        
+        // console.log(session);
                 
         navigate('/lecturerattendance')
     }

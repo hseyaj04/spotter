@@ -1,23 +1,51 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useState, useContext, useEffect} from 'react';
 import Logo from '../components/Logo';
 import Axios from 'axios';
-import { lecturerDataContext } from '../context/LecturerContext';
-
+import {useNavigate} from 'react-router-dom';
+import { SessionDataContext } from '../context/SessionContext';
 function LecturerAttendance() {
     const [isQrSelected, setIsQrSelected] = useState(true);
     const [isPresentSelected, setIsPresentSelected] = useState(false);
     const [attendees, setAttendees] = useState([]);
-    const qrImage = "https://www.qrcode-monkey.com/img/default-preview-qr.svg";
+    const navigate = useNavigate();
     // const { lecturer } = useContext(lecturerDataContext);
+    const {sessionData, setSessionData } = useContext(SessionDataContext);
+    // console.log(sessionData);
+    const qrImage = sessionData.qrDataURL;
+    // qrImage = session.
     
+
+    
+
     
     const handlePresentClick = async () => {
-        const sessionId = "6804b6ea63c4e1c9a0607da5";
+        const sessionId = sessionData.session._id;
         const response = (await Axios.get(`http://localhost:5000/api/v1/sessions/get-session/${sessionId}`)).data.attendees;
         setAttendees(response);
 
         setIsPresentSelected(true);
         setIsQrSelected(false);
+    };
+
+    const handleEndAttendance = async () => {
+        const sessionId = sessionData.session._id;
+        try {
+            await Axios.post(`http://localhost:5000/api/v1/sessions/end-session/`, {
+                sessionId: sessionId,
+            });
+            setSessionData((prevData) => ({
+                ...prevData,
+                session: {
+                    ...prevData.session,
+                    status: 'completed',
+                },
+            }));
+            navigate('/lecturerhome');
+            // alert('Attendance session ended successfully.');
+        } catch (error) {
+            console.error('Error ending attendance session:', error);
+            alert('Failed to end attendance session.');
+        }
     };
 
     return (
@@ -58,6 +86,14 @@ function LecturerAttendance() {
                         ))}
                     </div>
                 )}
+            </div>
+            <div className='mt-5'>
+                <button
+                    onClick={handleEndAttendance}
+                    className='bg-red-600 py-3 text-2xl rounded-full text-white font-semibold w-full'
+                >
+                    End Attendance
+                </button>
             </div>
         </div>
     );

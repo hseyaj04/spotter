@@ -31,6 +31,20 @@ const createSession = async (sessionData) => {
     }
 }
 
+const endSession = async (sessionId) => {
+    try {
+        const session = await Session.findById(sessionId);
+        if (!session) {
+            throw new Error('Session not found');
+        }
+        session.status = 'completed';
+        await session.save();
+        return session;
+    } catch (error) {
+        throw new Error('Error ending session: ' + error.message);
+    }
+}
+
 
 const getSessionById = async (sessionId) => {
     try {
@@ -46,5 +60,6 @@ const getSessionById = async (sessionId) => {
 
 module.exports = {
     createSession,
-    getSessionById
+    getSessionById,
+    endSession
 }
