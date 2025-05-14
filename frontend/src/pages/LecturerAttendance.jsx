@@ -21,6 +21,8 @@ function LecturerAttendance() {
     const handlePresentClick = async () => {
         const sessionId = sessionData.session._id;
         const response = (await Axios.get(`http://localhost:5000/api/v1/sessions/get-session/${sessionId}`)).data.attendees;
+        console.log(response);
+        
         setAttendees(response);
 
         setIsPresentSelected(true);

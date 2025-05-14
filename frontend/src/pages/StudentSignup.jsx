@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, use } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
+import { StudentDataContext } from '../context/StudentContext';
 import Axios from 'axios';
 const StudentSignup = () => {
+  const {student, setStudent} = useContext(StudentDataContext);
   const [formData, setFormData] = useState({
     fullname: {
         firstname: '',
@@ -57,6 +59,9 @@ const StudentSignup = () => {
         password: formData.password,
       }
     )
+    console.log(loginResponse.data.data);
+    setStudent(loginResponse.data.data.student);
+    
     localStorage.setItem('token', loginResponse.data.data.token)
     // console.log(loginResponse.data);
 

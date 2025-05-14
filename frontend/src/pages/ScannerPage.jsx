@@ -1,13 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import Logo from '../components/Logo.jsx';
 import Check from '../../../assets/check.png';
+import { StudentDataContext } from '../context/StudentContext.jsx';
+import Axios from 'axios';
 const ScannerPage = (props) => {
   const [data, setData] = useState("Not Found");
   const [isScanned, setIsScanned] = useState(false);
   const navigate = useNavigate();
+  const {student, setStudent} = useContext(StudentDataContext);
 
+  useEffect(()=>{
+    const studentId = student._id;
+    const qrPayload = data;
+    const token = localStorage.getItem('token'); // Retrieve the token from local storage
+    console.log(studentId, qrPayload);
+    const markAttendance = async () => {
+      try {
+        const response = await Axios.post('http://localhost:5000/api/v1/students/attendance', {
+          studentId,
+          qrPayload
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+          },
+        });
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error marking attendance:', error);
+      }
+    };
+    if (isScanned) {
+      markAttendance();
+    }
+    
+  }, [data])
   const handleProceed = () => {
     if (isScanned) {
       navigate('/final');
