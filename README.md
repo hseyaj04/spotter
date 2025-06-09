@@ -25,8 +25,17 @@ Spotter is a modern, user-friendly attendance management system that leverages Q
 - Role-based access control
 - Comprehensive reporting
 
-## Tech Stack
 
+![image](https://github.com/user-attachments/assets/a35a3b72-a6fe-4587-a50c-b80834e811d7) ![image](https://github.com/user-attachments/assets/6779392e-2c46-4b83-96c1-4f04b0b06a44) ![image](https://github.com/user-attachments/assets/f612aece-3927-4d74-8401-4da45a652461) ![image](https://github.com/user-attachments/assets/a4e26985-0622-413a-9c13-3c6a474e873e)
+
+
+
+
+## Tech Stack
+ - MongoDB
+ - Express.js
+ - React.js
+ - Node.js
 ### Frontend
 - React 18
 - Vite
